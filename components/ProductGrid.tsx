@@ -41,7 +41,7 @@ const products = [
   {
     id: 4,
     name: "Vital Force Syrup - For Daily Strength",
-    image: "/vital-force.webp",
+    image: "/image.png",
     rating: 4.6,
     reviews: 95,
     price: 799,
