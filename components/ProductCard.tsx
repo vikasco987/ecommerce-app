@@ -1,23 +1,25 @@
 "use client";
+import { useCart } from "@/app/context/CartContext";
 
-import Link from "next/link";
+export default function ProductCard({ product }) {
+  const { addToCart } = useCart();
 
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-}
+  const handleBuyNow = () => {
+    console.log("Buy Now clicked for:", product); // ✅ Debug log
+    addToCart(product);
+    console.log("Cart updated"); // ✅ Debug log
+  };
 
-export default function ProductCard({ product }: { product: Product }) {
   return (
-    <div className="border rounded-lg p-4 shadow-md">
-      <img src={product.image} alt={product.name} className="w-full h-40 object-cover rounded-md" />
-      <h3 className="mt-2 text-lg font-semibold">{product.name}</h3>
-      <p className="text-gray-600">₹{product.price}</p>
-      <Link href={`/products/${product.id}`} className="mt-2 inline-block bg-blue-600 text-white px-4 py-2 rounded">
-        View
-      </Link>
+    <div className="p-4 border rounded-lg shadow bg-white">
+      <h3 className="text-lg font-semibold">{product.name}</h3>
+      <p className="text-gray-600">${product.price}</p>
+      <button
+        onClick={handleBuyNow}
+        className="mt-3 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+      >
+        Buy Now
+      </button>
     </div>
   );
 }
