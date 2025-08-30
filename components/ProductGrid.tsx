@@ -275,7 +275,7 @@ export default function ProductGrid() {
                   onClick={() => addToCart(product)} // 👈 Add to cart instead of link
                   className="mt-4 w-full bg-green-600 text-white text-center py-2 rounded-md font-medium hover:bg-green-700 transition"
                 >
-                  BUY NOW
+                  Buy Now
                 </button>
               </div>
             </div>
