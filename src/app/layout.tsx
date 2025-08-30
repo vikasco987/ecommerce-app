@@ -107,11 +107,47 @@
 
 
 
+// import "./globals.css";
+// import Navbar from "../../components/Navbar";
+// import Banner from "../../components/Banner";
+// import Categories from "../../components/CategorySection";
+// import ProductGrid from "../../components/ProductGrid";
+// import { CartProvider } from "./context/CartContext";
+
+// export const metadata = {
+//   title: "MyShop",
+//   description: "Simple Ecommerce in Next.js",
+// };
+
+// export default function RootLayout({ children }: { children: React.ReactNode }) {
+//   return (
+//     <html lang="en">
+//       <body className="bg-gray-50">
+//         <CartProvider>
+//           <Navbar />
+//           <Banner />
+//           <Categories />
+//           <ProductGrid />
+//           <main className="p-6">{children}</main>
+//         </CartProvider>
+//       </body>
+//     </html>
+//   );
+// }
+
+
+
+
+
+
+
+
 import "./globals.css";
 import Navbar from "../../components/Navbar";
 import Banner from "../../components/Banner";
 import Categories from "../../components/CategorySection";
 import ProductGrid from "../../components/ProductGrid";
+import FloatingCartBar from "../../components/FloatingCartBar"; // ✅ add this
 import { CartProvider } from "./context/CartContext";
 
 export const metadata = {
@@ -129,6 +165,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Categories />
           <ProductGrid />
           <main className="p-6">{children}</main>
+
+          {/* ✅ Floating cart bar */}
+          <FloatingCartBar />
         </CartProvider>
       </body>
     </html>
