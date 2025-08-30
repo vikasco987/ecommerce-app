@@ -30,7 +30,7 @@ const products = [
   {
     id: 3,
     name: "Power Boost Herbal Tonic - Energy & Vitality",
-    image: "/power-boost.webp",
+    image: "/image2.png",
     rating: 4.7,
     reviews: 120,
     price: 1499,
@@ -41,7 +41,7 @@ const products = [
   {
     id: 4,
     name: "Vital Force Syrup - For Daily Strength",
-    image: "/image.png",
+    image: "/image1.png",
     rating: 4.6,
     reviews: 95,
     price: 799,
@@ -52,7 +52,7 @@ const products = [
   {
     id: 5,
     name: "Vital Force Syrup - For Daily Strength",
-    image: "/vital-force.webp",
+    image: "/image3.png",
     rating: 4.6,
     reviews: 95,
     price: 799,
