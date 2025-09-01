@@ -63,18 +63,60 @@
 
 
 
+// "use client";
+
+// import { useRouter } from "next/navigation";
+// import { useCart } from "@/app/context/CartContext"; // ✅ use this instead of hooks/useCart
+
+// type Product = {
+//   id: string;
+//   name: string;
+//   price: number;
+//   image: string;
+//   description?: string;
+// };
+
+// export default function ProductCard({ product }: { product: Product }) {
+//   const { addToCart } = useCart();
+//   const router = useRouter();
+
+//   return (
+//     <div className="border rounded-lg p-4 shadow-md">
+//       <img
+//         src={product.image}
+//         alt={product.name}
+//         className="w-full h-48 object-cover rounded"
+//       />
+//       <h2 className="text-lg font-semibold mt-2">{product.name}</h2>
+//       <p className="text-gray-600">₹{product.price}</p>
+
+//       <div className="flex gap-2 mt-4">
+//         <button
+//           onClick={() => addToCart(product)}
+//           className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+//         >
+//           Add to Cart
+//         </button>
+//         <button
+//           onClick={() => router.push(`/product/${product.id}`)}
+//           className="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300"
+//         >
+//           View Details
+//         </button>
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
+
+
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useCart } from "@/app/context/CartContext"; // ✅ use this instead of hooks/useCart
-
-type Product = {
-  id: string;
-  name: string;
-  price: number;
-  image: string;
-  description?: string;
-};
+import { useCart } from "@/app/context/CartContext";
+import type { Product } from "@/types/product"; // ✅ shared type
 
 export default function ProductCard({ product }: { product: Product }) {
   const { addToCart } = useCart();
