@@ -243,7 +243,130 @@
 //       </div>
 //     </div>
 //   );
+// // }
+
+// "use client";
+
+// import { useRouter } from "next/navigation";
+// import { useCart } from "@/app/context/CartContext";
+// import { Product } from "@/types/product";
+
+// interface ProductCardProps {
+//   product: Product;
 // }
+
+// export default function ProductCard({ product }: ProductCardProps) {
+//   const { addToCart } = useCart();
+//   const router = useRouter();
+
+//   const handleAddToCart = () => {
+//     // Ensure product has default quantity
+//     addToCart({
+//       ...product,
+//       quantity: 1,
+//     });
+//   };
+
+//   return (
+//     <div className="border rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow">
+//       {/* fallback image if not available */}
+//       <img
+//         src={product.image || "/placeholder.png"}
+//         alt={product.name}
+//         className="w-full h-48 object-cover rounded-md"
+//       />
+
+//       <h2 className="text-lg font-semibold mt-3">{product.name}</h2>
+
+//       <p className="text-gray-700 font-medium">
+//         ₹{typeof product.price === "number" ? product.price.toFixed(2) : product.price}
+//       </p>
+
+//       <div className="flex gap-3 mt-4">
+//         <button
+//           onClick={handleAddToCart}
+//           className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+//         >
+//           Add to Cart
+//         </button>
+
+//         <button
+//           onClick={() => router.push(`/product/${product.id}`)}
+//           className="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors"
+//         >
+//           View Details
+//         </button>
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
+
+// "use client";
+
+// import { useRouter } from "next/navigation";
+// import { useCart } from "@/app/context/CartContext";
+// import { Product, CartItem } from "@/types/product";
+
+// interface ProductCardProps {
+//   product: Product;
+// }
+
+// export default function ProductCard({ product }: ProductCardProps) {
+//   const { addToCart } = useCart();
+//   const router = useRouter();
+
+//   const handleAddToCart = () => {
+//     addToCart({
+//       ...product,
+//       quantity: 1, // always default to 1 when adding
+//     });
+//   };
+
+//   return (
+//     <div className="border rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow flex flex-col">
+//       {/* Product Image */}
+//       <img
+//         src={product.image || "/placeholder.png"}
+//         alt={product.name}
+//         className="w-full h-48 object-cover rounded-md"
+//       />
+
+//       {/* Product Info */}
+//       <div className="flex-1 mt-3">
+//         <h2 className="text-lg font-semibold">{product.name}</h2>
+//         <p className="text-gray-700 font-medium mt-1">
+//           ₹
+//           {typeof product.price === "number"
+//             ? product.price.toFixed(2)
+//             : Number(product.price).toFixed(2)}
+//         </p>
+//       </div>
+
+//       {/* Buttons */}
+//       <div className="flex gap-3 mt-4">
+//         <button
+//           onClick={handleAddToCart}
+//           className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+//         >
+//           Add to Cart
+//         </button>
+
+//         <button
+//           onClick={() => router.push(`/product/${product.id}`)}
+//           className="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors"
+//         >
+//           View Details
+//         </button>
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
 
 
 
@@ -252,7 +375,7 @@
 
 import { useRouter } from "next/navigation";
 import { useCart } from "@/app/context/CartContext";
-import type { Product } from "@/types/product";
+import { Product, CartItem } from "@/types/product";
 
 interface ProductCardProps {
   product: Product;
@@ -262,20 +385,39 @@ export default function ProductCard({ product }: ProductCardProps) {
   const { addToCart } = useCart();
   const router = useRouter();
 
+  const handleAddToCart = () => {
+    const cartItem: CartItem = {
+      ...product,
+      quantity: 1, // ✅ explicitly typed as CartItem
+    };
+
+    addToCart(cartItem); // ✅ no TS error now
+  };
+
   return (
-    <div className="border rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow">
+    <div className="border rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow flex flex-col">
+      {/* Product Image */}
       <img
-        src={product.image}
+        src={product.image || "/placeholder.png"}
         alt={product.name}
         className="w-full h-48 object-cover rounded-md"
       />
 
-      <h2 className="text-lg font-semibold mt-3">{product.name}</h2>
-      <p className="text-gray-700 font-medium">₹{product.price}</p>
+      {/* Product Info */}
+      <div className="flex-1 mt-3">
+        <h2 className="text-lg font-semibold">{product.name}</h2>
+        <p className="text-gray-700 font-medium mt-1">
+          ₹
+          {typeof product.price === "number"
+            ? product.price.toFixed(2)
+            : Number(product.price).toFixed(2)}
+        </p>
+      </div>
 
+      {/* Buttons */}
       <div className="flex gap-3 mt-4">
         <button
-          onClick={() => addToCart(product)}
+          onClick={handleAddToCart}
           className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
         >
           Add to Cart
