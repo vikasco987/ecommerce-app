@@ -63,18 +63,17 @@
 
 
 
+"use client";
 
-
-// components/ProductCard.tsx
 import { useRouter } from "next/navigation";
-import { useCart } from "@/hooks/useCart";
+import { useCart } from "@/app/context/CartContext"; // ✅ use this instead of hooks/useCart
 
 type Product = {
   id: string;
   name: string;
   price: number;
   image: string;
-  description?: string; // optional
+  description?: string;
 };
 
 export default function ProductCard({ product }: { product: Product }) {
