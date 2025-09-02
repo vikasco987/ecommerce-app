@@ -8,7 +8,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     const { id } = params;
 
     const order = await Order.findById(id);
-    if (!order) {
+    if (!order) 0 {
       return NextResponse.json({ success: false, error: "Order not found" }, { status: 404 });
     }
 
