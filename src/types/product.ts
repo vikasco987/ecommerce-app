@@ -23,7 +23,8 @@ export type Product = {
   name: string;
  
   price: number;
-  slug: string;
+//   slug: string;
+     slug?: string;
     image?: string;
      description?: string;
   // optional fields for UI
