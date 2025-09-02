@@ -7,7 +7,7 @@
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 // import { Product } from "../../../models/Product";
-import { Product } from "@/models/Product";
+import Product from "@/models/Product";
 
 
 

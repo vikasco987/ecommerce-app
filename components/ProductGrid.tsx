@@ -1137,7 +1137,7 @@
 
 
 
-// File: src/app/components/ProductGrid.tsx
+// File: components/ProductGrid.tsx
 "use client";
 
 import Image from "next/image";

@@ -640,27 +640,122 @@
 
 
 
+// "use client";
+
+// import Image from "next/image";
+// import { useRouter } from "next/navigation";
+// import { useCart } from "@/app/context/CartContext";
+
+// interface Product {
+//   _id: string;
+//   name: string;
+//   image?: string;
+//   price: number;
+//   oldPrice?: number;
+//   discount?: number;
+//   slug: string;
+//   rating?: number;
+//   reviews?: number;
+// }
+
+// interface CartItem extends Product {
+//   quantity: number;
+// }
+
+// interface ProductCardProps {
+//   product: Product;
+// }
+
+// export default function ProductCard({ product }: ProductCardProps) {
+//   const { addToCart } = useCart();
+//   const router = useRouter();
+
+//   // ✅ Fix: include _id
+//   const handleAddToCart = () => {
+//     const cartItem: CartItem = {
+//       ...product,
+//       _id: product._id, // must use _id from MongoDB
+//       quantity: 1,
+//     };
+
+//     addToCart(cartItem);
+//   };
+
+//   return (
+//     <div className="border rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow flex flex-col">
+//       {/* Product Image */}
+//       <div className="relative w-full h-48">
+//         <Image
+//           src={product.image || "/placeholder.png"}
+//           alt={product.name || "Product Image"}
+//           fill
+//           className="object-cover rounded-md"
+//           priority
+//         />
+//       </div>
+
+//       {/* Product Info */}
+//       <div className="flex-1 mt-3">
+//         <h2 className="text-lg font-semibold line-clamp-2">{product.name}</h2>
+
+//         <div className="flex items-center gap-2 mt-1">
+//           <span className="text-green-700 font-bold text-lg">
+//             ₹{Number(product.price).toLocaleString()}
+//           </span>
+//           {product.oldPrice && (
+//             <span className="text-gray-400 text-sm line-through">
+//               ₹{Number(product.oldPrice).toLocaleString()}
+//             </span>
+//           )}
+//         </div>
+
+//         {product.discount && (
+//           <p className="text-orange-600 text-sm font-semibold mt-1">
+//             {product.discount}% OFF
+//           </p>
+//         )}
+
+//         {product.rating && (
+//           <p className="text-yellow-500 text-sm mt-1">
+//             {"⭐".repeat(Math.floor(product.rating))} ({product.reviews ?? 0})
+//           </p>
+//         )}
+//       </div>
+
+//       {/* Buttons */}
+//       <div className="flex gap-3 mt-4">
+//         <button
+//           onClick={handleAddToCart}
+//           className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex-1"
+//         >
+//           Add to Cart
+//         </button>
+
+//         <button
+//           onClick={() => router.push(`/product/${product.slug}`)}
+//           className="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex-1"
+//         >
+//           View Details
+//         </button>
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
+
+
+
+
+
+
 "use client";
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/app/context/CartContext";
-
-interface Product {
-  _id: string;
-  name: string;
-  image?: string;
-  price: number;
-  oldPrice?: number;
-  discount?: number;
-  slug: string;
-  rating?: number;
-  reviews?: number;
-}
-
-interface CartItem extends Product {
-  quantity: number;
-}
+import { Product, CartItem } from "@/types/product"; // ✅ use shared types
 
 interface ProductCardProps {
   product: Product;
@@ -670,11 +765,10 @@ export default function ProductCard({ product }: ProductCardProps) {
   const { addToCart } = useCart();
   const router = useRouter();
 
-  // ✅ Fix: include _id
   const handleAddToCart = () => {
     const cartItem: CartItem = {
       ...product,
-      _id: product._id, // must use _id from MongoDB
+      id: product.id || product._id || "", // ✅ always provide `id`
       quantity: 1,
     };
 

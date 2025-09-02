@@ -228,7 +228,7 @@ export default function Navbar() {
       <div className="container mx-auto flex justify-between items-center px-4 py-3">
         {/* Logo */}
         <Link href="/" className="text-2xl font-bold text-indigo-600">
-          ShopCart
+          Aushdhi Viraat
         </Link>
 
         {/* Desktop Menu */}
