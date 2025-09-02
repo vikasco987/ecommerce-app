@@ -68,7 +68,7 @@
 // src/types/product.ts
 
 export interface Product {
- id?: string;       // Always required in frontend
+ id: string;       // Always required in frontend
   _id?: string;      // Optional MongoDB ObjectId
   name: string;
   price: number;
