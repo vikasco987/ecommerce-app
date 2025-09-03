@@ -885,23 +885,276 @@
 //       { status: 500 }
 //     );
 //   }
+// // }
+// ///new below
+// import { NextRequest, NextResponse } from "next/server";
+// import { connectDB } from "@/lib/mongodb";
+// import Order from "@/models/Order";
+// import mongoose from "mongoose";
+// import type { RouteContext } from "next"; // ✅ import this
+
+// // GET /api/orders/[id]
+// export async function GET(
+//   req: NextRequest,
+//   context: RouteContext<{ id: string }>
+// ) {
+//   try {
+//     await connectDB();
+
+//     const { id } = await context.params; // ✅ requires await in Next.js 15
+
+//     if (!mongoose.Types.ObjectId.isValid(id)) {
+//       return NextResponse.json(
+//         { success: false, error: "Invalid order ID" },
+//         { status: 400 }
+//       );
+//     }
+
+//     const order = await Order.findById(id);
+//     if (!order) {
+//       return NextResponse.json(
+//         { success: false, error: "Order not found" },
+//         { status: 404 }
+//       );
+//     }
+
+//     return NextResponse.json({ success: true, order });
+//   } catch (err) {
+//     console.error(err);
+//     return NextResponse.json(
+//       { success: false, error: "Failed to fetch order" },
+//       { status: 500 }
+//     );
+//   }
 // }
-///new below
+
+// // PATCH /api/orders/[id]
+// export async function PATCH(
+//   req: NextRequest,
+//   context: RouteContext<{ id: string }>
+// ) {
+//   try {
+//     await connectDB();
+//     const body = await req.json();
+//     const { paymentStatus, deliveryStatus, status } = body;
+
+//     const updateData: any = {};
+//     if (paymentStatus) updateData.paymentStatus = paymentStatus;
+//     if (deliveryStatus || status)
+//       updateData.deliveryStatus = deliveryStatus || status;
+
+//     const { id } = await context.params; // ✅
+
+//     if (!mongoose.Types.ObjectId.isValid(id)) {
+//       return NextResponse.json(
+//         { success: false, error: "Invalid order ID" },
+//         { status: 400 }
+//       );
+//     }
+
+//     const order = await Order.findByIdAndUpdate(id, updateData, { new: true });
+//     if (!order) {
+//       return NextResponse.json(
+//         { success: false, error: "Order not found" },
+//         { status: 404 }
+//       );
+//     }
+
+//     return NextResponse.json({ success: true, order });
+//   } catch (err) {
+//     console.error(err);
+//     return NextResponse.json(
+//       { success: false, error: "Failed to update order" },
+//       { status: 500 }
+//     );
+//   }
+// }
+
+// // DELETE /api/orders/[id]
+// export async function DELETE(
+//   req: NextRequest,
+//   context: RouteContext<{ id: string }>
+// ) {
+//   try {
+//     await connectDB();
+//     const { id } = await context.params; // ✅
+
+//     if (!mongoose.Types.ObjectId.isValid(id)) {
+//       return NextResponse.json(
+//         { success: false, error: "Invalid order ID" },
+//         { status: 400 }
+//       );
+//     }
+
+//     const order = await Order.findByIdAndDelete(id);
+//     if (!order) {
+//       return NextResponse.json(
+//         { success: false, error: "Order not found" },
+//         { status: 404 }
+//       );
+//     }
+
+//     return NextResponse.json({ success: true });
+//   } catch (err) {
+//     console.error(err);
+//     return NextResponse.json(
+//       { success: false, error: "Failed to delete order" },
+//       { status: 500 }
+//     );
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+// import { NextRequest, NextResponse } from "next/server";
+// import { connectDB } from "@/lib/mongodb";
+// import Order from "@/models/Order";
+// import mongoose from "mongoose";
+
+// // ✅ GET /api/orders/[id]
+// export async function GET(
+//   req: NextRequest,
+//   { params }: { params: { id: string } }
+// ) {
+//   try {
+//     await connectDB();
+
+//     const { id } = params;
+
+//     if (!mongoose.Types.ObjectId.isValid(id)) {
+//       return NextResponse.json(
+//         { success: false, error: "Invalid order ID" },
+//         { status: 400 }
+//       );
+//     }
+
+//     const order = await Order.findById(id);
+//     if (!order) {
+//       return NextResponse.json(
+//         { success: false, error: "Order not found" },
+//         { status: 404 }
+//       );
+//     }
+
+//     return NextResponse.json({ success: true, order });
+//   } catch (err) {
+//     console.error(err);
+//     return NextResponse.json(
+//       { success: false, error: "Failed to fetch order" },
+//       { status: 500 }
+//     );
+//   }
+// }
+
+// // ✅ PATCH /api/orders/[id]
+// export async function PATCH(
+//   req: NextRequest,
+//   { params }: { params: { id: string } }
+// ) {
+//   try {
+//     await connectDB();
+//     const body = await req.json();
+//     const { paymentStatus, deliveryStatus, status } = body;
+
+//     const updateData: any = {};
+//     if (paymentStatus) updateData.paymentStatus = paymentStatus;
+//     if (deliveryStatus || status)
+//       updateData.deliveryStatus = deliveryStatus || status;
+
+//     const { id } = params;
+
+//     if (!mongoose.Types.ObjectId.isValid(id)) {
+//       return NextResponse.json(
+//         { success: false, error: "Invalid order ID" },
+//         { status: 400 }
+//       );
+//     }
+
+//     const order = await Order.findByIdAndUpdate(id, updateData, { new: true });
+//     if (!order) {
+//       return NextResponse.json(
+//         { success: false, error: "Order not found" },
+//         { status: 404 }
+//       );
+//     }
+
+//     return NextResponse.json({ success: true, order });
+//   } catch (err) {
+//     console.error(err);
+//     return NextResponse.json(
+//       { success: false, error: "Failed to update order" },
+//       { status: 500 }
+//     );
+//   }
+// }
+
+// // ✅ DELETE /api/orders/[id]
+// export async function DELETE(
+//   req: NextRequest,
+//   { params }: { params: { id: string } }
+// ) {
+//   try {
+//     await connectDB();
+//     const { id } = params;
+
+//     if (!mongoose.Types.ObjectId.isValid(id)) {
+//       return NextResponse.json(
+//         { success: false, error: "Invalid order ID" },
+//         { status: 400 }
+//       );
+//     }
+
+//     const order = await Order.findByIdAndDelete(id);
+//     if (!order) {
+//       return NextResponse.json(
+//         { success: false, error: "Order not found" },
+//         { status: 404 }
+//       );
+//     }
+
+//     return NextResponse.json({ success: true });
+//   } catch (err) {
+//     console.error(err);
+//     return NextResponse.json(
+//       { success: false, error: "Failed to delete order" },
+//       { status: 500 }
+//     );
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
 import { NextRequest, NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import Order from "@/models/Order";
 import mongoose from "mongoose";
-import type { RouteContext } from "next"; // ✅ import this
 
-// GET /api/orders/[id]
+// ✅ GET /api/orders/[id]
 export async function GET(
   req: NextRequest,
-  context: RouteContext<{ id: string }>
+  { params }: { params: Promise<{ id: string }> } // 👈 params is async
 ) {
   try {
     await connectDB();
 
-    const { id } = await context.params; // ✅ requires await in Next.js 15
+    const { id } = await params; // 👈 must await
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return NextResponse.json(
@@ -928,10 +1181,10 @@ export async function GET(
   }
 }
 
-// PATCH /api/orders/[id]
+// ✅ PATCH /api/orders/[id]
 export async function PATCH(
   req: NextRequest,
-  context: RouteContext<{ id: string }>
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
@@ -943,7 +1196,7 @@ export async function PATCH(
     if (deliveryStatus || status)
       updateData.deliveryStatus = deliveryStatus || status;
 
-    const { id } = await context.params; // ✅
+    const { id } = await params; // 👈 await
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return NextResponse.json(
@@ -970,14 +1223,14 @@ export async function PATCH(
   }
 }
 
-// DELETE /api/orders/[id]
+// ✅ DELETE /api/orders/[id]
 export async function DELETE(
   req: NextRequest,
-  context: RouteContext<{ id: string }>
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
-    const { id } = await context.params; // ✅
+    const { id } = await params; // 👈 await
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return NextResponse.json(
