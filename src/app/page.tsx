@@ -142,6 +142,80 @@
 
 
 
+// import Banner from "../../components/Banner";
+// import Categories from "../../components/CategorySection";
+// import ProductGrid from "../../components/ProductGrid";
+// import TopDiscountedProducts from "../../components/TopDiscountedProducts";
+// import MidBanner from "../../components/MidBanner"; 
+// import PromisesSection from "../../components/PromisesSection";
+// import ReviewSection from "../../components/ReviewSection";
+// import Footer from "../../components/Footer";
+
+// export default function HomePage() {
+//   return (
+//     <>
+//       {/* ✅ Full-width banner (works on laptop + mobile) */}
+//       <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
+//         <Banner />
+//       </div>
+
+//       {/* ✅ Keep other sections centered */}
+//       <div className="container mx-auto px-4">
+//         <Categories />
+//         <ProductGrid />
+//         <MidBanner />  
+//         <TopDiscountedProducts />
+//         <PromisesSection /> 
+//         <ReviewSection />
+//       </div>
+
+//       <Footer /> {/* 👈 Footer at the bottom */}
+//     </>
+//   );
+// }
+
+
+
+
+
+// import Banner from "../../components/Banner";
+// import Categories from "../../components/CategorySection";
+// import ProductGrid from "../../components/ProductGrid";
+// import TopDiscountedProducts from "../../components/TopDiscountedProducts";
+// import MidBanner from "../../components/MidBanner"; 
+// import PromisesSection from "../../components/PromisesSection";
+// import ReviewSection from "../../components/ReviewSection";
+// import Footer from "../../components/Footer";
+
+// export default function HomePage() {
+//   return (
+//     <>
+//       {/* ✅ Banner full width */}
+//       <div className="w-full max-w-none">
+//         <Banner />
+//       </div>
+
+//       {/* ✅ All sections full width like banner */}
+//       <div className="w-full max-w-none">
+//         <Categories />
+//         <ProductGrid />
+//         <MidBanner />  
+//         <TopDiscountedProducts />
+//         <PromisesSection /> 
+//         <ReviewSection />
+//       </div>
+
+//       {/* ✅ Footer full width */}
+//       <div className="w-full max-w-none">
+//         <Footer />
+//       </div>
+//     </>
+//   );
+// }
+
+
+
+
 import Banner from "../../components/Banner";
 import Categories from "../../components/CategorySection";
 import ProductGrid from "../../components/ProductGrid";
@@ -153,23 +227,26 @@ import Footer from "../../components/Footer";
 
 export default function HomePage() {
   return (
-    <>
-      {/* ✅ Full-width banner (works on laptop + mobile) */}
-      <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
+    <div className="w-full overflow-x-hidden"> 
+      {/* ✅ Banner full width */}
+      <section className="w-full">
         <Banner />
-      </div>
+      </section>
 
-      {/* ✅ Keep other sections centered */}
-      <div className="container mx-auto px-4">
+      {/* ✅ Other sections full width */}
+      <section className="w-full">
         <Categories />
         <ProductGrid />
         <MidBanner />  
         <TopDiscountedProducts />
         <PromisesSection /> 
         <ReviewSection />
-      </div>
+      </section>
 
-      <Footer /> {/* 👈 Footer at the bottom */}
-    </>
+      {/* ✅ Footer full width */}
+      <section className="w-full">
+        <Footer />
+      </section>
+    </div>
   );
 }
