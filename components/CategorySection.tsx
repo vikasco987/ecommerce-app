@@ -175,47 +175,108 @@
 // }
 
 
+// "use client";
+
+// import Image from "next/image";
+
+// const categories = [
+//   { id: 1, name: "Men Wellness", image: "/c1.jpg", link: "/category/skincare" },
+//   { id: 2, name: "Women-Wellness", image: "/c2.jpg", link: "/category/haircare" },
+//   { id: 3, name: "Supplements", image: "/c3.jpg", link: "/category/supplements" },
+//   { id: 4, name: "Ayurvedic Oils", image: "/c4.jpg", link: "/category/oils" },
+//     { id: 5, name: "Stomach-Problem", image: "/c5.avif", link: "/category/skincare" },
+//   { id: 6, name: "Immunity-Booster", image: "/c6.avif", link: "/category/haircare" },
+//   { id: 7, name: "Memory-Booster", image: "/c7.avif", link: "/category/supplements" },
+//   { id: 8, name: "Weight-Gain", image: "/c8.avif", link: "/category/oils" },
+// ];
+
+// export default function TopCategories() {
+//   return (
+//     <section className="py-10 bg-gray-50">
+//       <h2 className="text-2xl font-bold text-center mb-6">Top Categories</h2>
+
+//       {/* ✅ Scrollable Row - scrollbar hidden */}
+//       <div className="overflow-x-auto no-scrollbar px-4">
+//         <div className="flex gap-6">
+//           {categories.map((cat) => (
+//             <div
+//               key={cat.id}
+//               className="flex-shrink-0 w-48 bg-white shadow-md rounded-xl overflow-hidden hover:shadow-xl transition-transform hover:-translate-y-1"
+//             >
+//               {/* Image */}
+//               <div className="relative w-full h-44">
+//                 <Image
+//                   src={cat.image}
+//                   alt={cat.name}
+//                   fill
+//                   className="object-cover"
+//                 />
+//               </div>
+
+//               {/* Name */}
+//               <div className="p-3 text-center bg-gray-100">
+//                 <p className="text-base font-semibold text-gray-800">
+//                   {cat.name}
+//                 </p>
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+
+
+
 "use client";
 
 import Image from "next/image";
 
 const categories = [
   { id: 1, name: "Men Wellness", image: "/c1.jpg", link: "/category/skincare" },
-  { id: 2, name: "Hair Care", image: "/c2.jpg", link: "/category/haircare" },
+  { id: 2, name: "Women-Wellness", image: "/c2.jpg", link: "/category/haircare" },
   { id: 3, name: "Supplements", image: "/c3.jpg", link: "/category/supplements" },
   { id: 4, name: "Ayurvedic Oils", image: "/c4.jpg", link: "/category/oils" },
+    { id: 5, name: "Stomach-Problem", image: "/c5.avif", link: "/category/skincare" },
+  { id: 6, name: "Immunity-Booster", image: "/c6.avif", link: "/category/haircare" },
+  { id: 7, name: "Memory-Booster", image: "/c7.avif", link: "/category/supplements" },
+  { id: 8, name: "Weight-Gain", image: "/c8.avif", link: "/category/oils" },
 ];
-
 export default function TopCategories() {
   return (
     <section className="py-10 bg-gray-50">
-      <h2 className="text-2xl font-bold text-center mb-6">Top Categories</h2>
+      <h2 className="text-3xl font-extrabold text-center mb-8 text-gray-900">
+        Top Categories
+      </h2>
 
-      {/* ✅ Scrollable Row - scrollbar hidden */}
-      <div className="overflow-x-auto no-scrollbar px-4">
-        <div className="flex gap-6">
+      {/* Mobile: horizontal scroll, Desktop: 2-row grid */}
+      <div className="px-4">
+        <div className="grid grid-flow-col auto-cols-[12rem] gap-6 overflow-x-auto md:grid-cols-5 md:grid-rows-2 md:auto-cols-auto md:grid-flow-row">
           {categories.map((cat) => (
-            <div
+            <a
               key={cat.id}
-              className="flex-shrink-0 w-48 bg-white shadow-md rounded-xl overflow-hidden hover:shadow-xl transition-transform hover:-translate-y-1"
+              href={cat.link}
+              className="flex flex-col bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-transform duration-300 cursor-pointer"
             >
-              {/* Image */}
-              <div className="relative w-full h-44">
+              {/* Image on top */}
+              <div className="relative w-full h-48">
                 <Image
                   src={cat.image}
                   alt={cat.name}
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 hover:scale-105"
                 />
               </div>
 
-              {/* Name */}
-              <div className="p-3 text-center bg-gray-100">
-                <p className="text-base font-semibold text-gray-800">
+              {/* Name below image */}
+              <div className="p-4 text-center bg-white">
+                <p className="text-lg font-semibold text-gray-800 hover:text-indigo-600 transition-colors">
                   {cat.name}
                 </p>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>
