@@ -539,7 +539,66 @@
 
 
 
-// src/components/Banner.tsx
+// // src/components/Banner.tsx
+// "use client";
+
+// import Image from "next/image";
+// import { useState, useEffect } from "react";
+
+// const banners = [
+//   { id: 1, image: "/ba1.webp" },
+//   { id: 2, image: "/ba2.webp" },
+//   { id: 3, image: "/ba3.webp" },
+//   { id: 4, image: "/ba4.webp" },
+//   { id: 5, image: "/ba5.webp" },
+// ];
+
+// export default function Banner() {
+//   const [current, setCurrent] = useState(0);
+
+//   useEffect(() => {
+//     const interval = setInterval(() => {
+//       setCurrent((prev) => (prev + 1) % banners.length);
+//     }, 5000);
+//     return () => clearInterval(interval);
+//   }, []);
+
+//   return (
+//     // ✅ force full viewport width
+//     <section className="relative w-screen overflow-hidden mt-16 sm:mt-20">
+//       {/* ✅ responsive height */}
+//       <div className="relative w-screen h-[40vh] sm:h-[60vh] lg:h-[90vh]">
+//         <Image
+//           key={banners[current].id}
+//           src={banners[current].image}
+//           alt="Banner"
+//           fill
+//           priority
+//           sizes="100vw"
+//           className="object-cover object-center"
+//         />
+//       </div>
+
+//       {/* ✅ Dots navigation */}
+//       <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex space-x-2">
+//         {banners.map((_, index) => (
+//           <button
+//             key={index}
+//             onClick={() => setCurrent(index)}
+//             className={`h-2 w-2 sm:h-3 sm:w-3 rounded-full transition-all duration-300 ${
+//               index === current
+//                 ? "bg-white scale-125 shadow-md"
+//                 : "bg-gray-400 hover:bg-gray-300"
+//             }`}
+//           />
+//         ))}
+//       </div>
+//     </section>
+//   );
+// }
+
+
+
 "use client";
 
 import Image from "next/image";
@@ -564,10 +623,9 @@ export default function Banner() {
   }, []);
 
   return (
-    // ✅ force full viewport width
-    <section className="relative w-screen overflow-hidden mt-16 sm:mt-20">
-      {/* ✅ responsive height */}
-      <div className="relative w-screen h-[40vh] sm:h-[60vh] lg:h-[90vh]">
+    <section className="relative w-full overflow-hidden mt-16 sm:mt-20">
+      {/* ✅ Responsive height: small for mobile, large for laptop */}
+      <div className="relative w-full h-[30vh] sm:h-[50vh] lg:h-[80vh]">
         <Image
           key={banners[current].id}
           src={banners[current].image}
@@ -579,8 +637,8 @@ export default function Banner() {
         />
       </div>
 
-      {/* ✅ Dots navigation */}
-      <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex space-x-2">
+      {/* ✅ Dots Navigation */}
+      <div className="absolute bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 flex space-x-2">
         {banners.map((_, index) => (
           <button
             key={index}

@@ -108,6 +108,40 @@
 
 
 
+// import Banner from "../../components/Banner";
+// import Categories from "../../components/CategorySection";
+// import ProductGrid from "../../components/ProductGrid";
+// import TopDiscountedProducts from "../../components/TopDiscountedProducts";
+// import MidBanner from "../../components/MidBanner"; 
+// import PromisesSection from "../../components/PromisesSection";
+// import ReviewSection from "../../components/ReviewSection";
+// import Footer from "../../components/Footer";
+
+// export default function HomePage() {
+//   return (
+//     <>
+//       {/* ✅ Full-width banner (no left/right white space) */}
+//       <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
+//         <Banner />
+//       </div>
+
+//       {/* Other sections inside normal layout */}
+//       <div className="container mx-auto px-4">
+//         <Categories />
+//         <ProductGrid />
+//         <MidBanner />  
+//         <TopDiscountedProducts />
+//         <PromisesSection /> 
+//         <ReviewSection />
+//       </div>
+
+//       <Footer /> {/* 👈 Footer at the bottom */}
+//     </>
+//   );
+// }
+
+
+
 import Banner from "../../components/Banner";
 import Categories from "../../components/CategorySection";
 import ProductGrid from "../../components/ProductGrid";
@@ -120,12 +154,12 @@ import Footer from "../../components/Footer";
 export default function HomePage() {
   return (
     <>
-      {/* ✅ Full-width banner (no left/right white space) */}
+      {/* ✅ Full-width banner (works on laptop + mobile) */}
       <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
         <Banner />
       </div>
 
-      {/* Other sections inside normal layout */}
+      {/* ✅ Keep other sections centered */}
       <div className="container mx-auto px-4">
         <Categories />
         <ProductGrid />
