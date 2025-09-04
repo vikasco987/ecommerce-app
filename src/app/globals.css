@@ -13,7 +13,17 @@ body {
 
   /* ✅ Prevent white gap + page shifting */
   width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
+
+  /* ✅ Consistent sizing across elements */
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
 @theme inline {

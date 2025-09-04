@@ -216,37 +216,99 @@
 
 
 
+// import Banner from "../../components/Banner";
+// import Categories from "../../components/CategorySection";
+// import ProductGrid from "../../components/ProductGrid";
+// import TopDiscountedProducts from "../../components/TopDiscountedProducts";
+// import MidBanner from "../../components/MidBanner"; 
+// import PromisesSection from "../../components/PromisesSection";
+// import ReviewSection from "../../components/ReviewSection";
+// import Footer from "../../components/Footer";
+
+// export default function HomePage() {
+//   return (
+//     <div className="w-full overflow-x-hidden"> 
+//       {/* ✅ Banner full width */}
+//       <section className="w-full">
+//         <Banner />
+//       </section>
+
+//       {/* ✅ Other sections full width */}
+//       <section className="w-full">
+//         <Categories />
+//         <ProductGrid />
+//         <MidBanner />  
+//         <TopDiscountedProducts />
+//         <PromisesSection /> 
+//         <ReviewSection />
+//       </section>
+
+//       {/* ✅ Footer full width */}
+//       <section className="w-full">
+//         <Footer />
+//       </section>
+//     </div>
+//   );
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
 import Banner from "../../components/Banner";
 import Categories from "../../components/CategorySection";
 import ProductGrid from "../../components/ProductGrid";
 import TopDiscountedProducts from "../../components/TopDiscountedProducts";
-import MidBanner from "../../components/MidBanner"; 
+import MidBanner from "../../components/MidBanner";
 import PromisesSection from "../../components/PromisesSection";
 import ReviewSection from "../../components/ReviewSection";
 import Footer from "../../components/Footer";
 
 export default function HomePage() {
   return (
-    <div className="w-full overflow-x-hidden"> 
-      {/* ✅ Banner full width */}
-      <section className="w-full">
+    <main className="w-screen overflow-x-hidden">
+      {/* ✅ Full-width banner */}
+      <section className="w-screen">
         <Banner />
       </section>
 
-      {/* ✅ Other sections full width */}
-      <section className="w-full">
+      {/* ✅ All sections forced full width */}
+      <section className="w-screen">
         <Categories />
+      </section>
+
+      <section className="w-screen">
         <ProductGrid />
-        <MidBanner />  
+      </section>
+
+      <section className="w-screen">
+        <MidBanner />
+      </section>
+
+      <section className="w-screen">
         <TopDiscountedProducts />
-        <PromisesSection /> 
+      </section>
+
+      <section className="w-screen">
+        <PromisesSection />
+      </section>
+
+      <section className="w-screen">
         <ReviewSection />
       </section>
 
       {/* ✅ Footer full width */}
-      <section className="w-full">
+      <footer className="w-screen">
         <Footer />
-      </section>
-    </div>
+      </footer>
+    </main>
   );
 }
