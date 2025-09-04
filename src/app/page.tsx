@@ -318,51 +318,97 @@
 
 
 
+// import Banner from "../../components/Banner";
+// import Categories from "../../components/CategorySection";
+// import ProductGrid from "../../components/ProductGrid";
+// import TopDiscountedProducts from "../../components/TopDiscountedProducts";
+// import MidBanner from "../../components/MidBanner";
+// import PromisesSection from "../../components/PromisesSection";
+// import ReviewSection from "../../components/ReviewSection";
+// import Footer from "../../components/Footer";
+
+// export default function HomePage() {
+//   return (
+//     // ✅ Root never wider than the viewport, no horizontal scroll
+//     <main className="site-root">
+//       {/* ✅ Full-bleed sections (no gap on left/right on any device) */}
+//       <section className="full-bleed">
+//         <Banner />
+//       </section>
+
+//       <section className="full-bleed">
+//         <Categories />
+//       </section>
+
+//       <section className="full-bleed">
+//         <ProductGrid />
+//       </section>
+
+//       <section className="full-bleed">
+//         <MidBanner />
+//       </section>
+
+//       <section className="full-bleed">
+//         <TopDiscountedProducts />
+//       </section>
+
+//       <section className="full-bleed">
+//         <PromisesSection />
+//       </section>
+
+//       <section className="full-bleed">
+//         <ReviewSection />
+//       </section>
+
+//       <footer className="full-bleed">
+//         <Footer />
+//       </footer>
+//     </main>
+//   );
+// }
+
+
+
+
+
+
+
+
 import Banner from "../../components/Banner";
 import Categories from "../../components/CategorySection";
 import ProductGrid from "../../components/ProductGrid";
 import TopDiscountedProducts from "../../components/TopDiscountedProducts";
-import MidBanner from "../../components/MidBanner";
+import MidBanner from "../../components/MidBanner"; 
 import PromisesSection from "../../components/PromisesSection";
 import ReviewSection from "../../components/ReviewSection";
 import Footer from "../../components/Footer";
 
 export default function HomePage() {
   return (
-    // ✅ Root never wider than the viewport, no horizontal scroll
-    <main className="site-root">
-      {/* ✅ Full-bleed sections (no gap on left/right on any device) */}
-      <section className="full-bleed">
+    <>
+      {/* ✅ Full-width banner (works on laptop + mobile) */}
+      <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
         <Banner />
-      </section>
-
-      <section className="full-bleed">
         <Categories />
-      </section>
-
-      <section className="full-bleed">
         <ProductGrid />
-      </section>
-
-      <section className="full-bleed">
-        <MidBanner />
-      </section>
-
-      <section className="full-bleed">
+        <MidBanner />  
         <TopDiscountedProducts />
-      </section>
-
-      <section className="full-bleed">
-        <PromisesSection />
-      </section>
-
-      <section className="full-bleed">
+        <PromisesSection /> 
         <ReviewSection />
-      </section>
+         <Footer />
+      </div>
 
-      <footer className="full-bleed">
-        <Footer />
-      </footer>
-    </main>
+      {/* ✅ Keep other sections centered */}
+      {/* <div className="container mx-auto px-4">
+        <Categories />
+        <ProductGrid />
+        <MidBanner />  
+        <TopDiscountedProducts />
+        <PromisesSection /> 
+        <ReviewSection />
+      </div> */}
+
+      {/* <Footer /> 👈 Footer at the bottom */}
+    </>
   );
 }
