@@ -479,6 +479,66 @@
 
 
 
+// // src/components/Banner.tsx
+// "use client";
+
+// import Image from "next/image";
+// import { useState, useEffect } from "react";
+
+// const banners = [
+//   { id: 1, image: "/ba1.webp" },
+//   { id: 2, image: "/ba2.webp" },
+//   { id: 3, image: "/ba3.webp" },
+//   { id: 4, image: "/ba4.webp" },
+//   { id: 5, image: "/ba5.webp" },
+// ];
+
+// export default function Banner() {
+//   const [current, setCurrent] = useState(0);
+
+//   useEffect(() => {
+//     const interval = setInterval(() => {
+//       setCurrent((prev) => (prev + 1) % banners.length);
+//     }, 5000);
+//     return () => clearInterval(interval);
+//   }, []);
+
+//   return (
+//     <section className="relative w-screen overflow-hidden mt-16 sm:mt-20">
+//       {/* ✅ Full screen width + responsive height */}
+//       <div className="relative w-screen h-[40vh] sm:h-[60vh] lg:h-[80vh]">
+//         <Image
+//           key={banners[current].id}
+//           src={banners[current].image}
+//           alt="Banner"
+//           fill
+//           priority
+//           sizes="100vw"
+//           className="object-contain sm:object-cover object-center"
+//         />
+//       </div>
+
+//       {/* ✅ Dots Navigation */}
+//       <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex space-x-2">
+//         {banners.map((_, index) => (
+//           <button
+//             key={index}
+//             onClick={() => setCurrent(index)}
+//             className={`h-2 w-2 sm:h-3 sm:w-3 rounded-full transition-all duration-300 ${
+//               index === current
+//                 ? "bg-white scale-125 shadow-md"
+//                 : "bg-gray-400 hover:bg-gray-300"
+//             }`}
+//           />
+//         ))}
+//       </div>
+//     </section>
+//   );
+// }
+
+
+
+
 // src/components/Banner.tsx
 "use client";
 
@@ -504,9 +564,9 @@ export default function Banner() {
   }, []);
 
   return (
-    <section className="relative w-screen overflow-hidden mt-16 sm:mt-20">
-      {/* ✅ Full screen width + responsive height */}
-      <div className="relative w-screen h-[40vh] sm:h-[60vh] lg:h-[80vh]">
+    <section className="relative w-full mt-16 sm:mt-20">
+      {/* ✅ Full width & height responsive banner */}
+      <div className="relative w-full h-[40vh] sm:h-[60vh] lg:h-[80vh]">
         <Image
           key={banners[current].id}
           src={banners[current].image}
@@ -514,7 +574,7 @@ export default function Banner() {
           fill
           priority
           sizes="100vw"
-          className="object-contain sm:object-cover object-center"
+          className="object-cover object-center"
         />
       </div>
 
