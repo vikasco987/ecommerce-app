@@ -564,9 +564,10 @@ export default function Banner() {
   }, []);
 
   return (
-    <section className="relative w-full mt-16 sm:mt-20">
-      {/* ✅ Full width & height responsive banner */}
-      <div className="relative w-full h-[40vh] sm:h-[60vh] lg:h-[80vh]">
+    // ✅ force full viewport width
+    <section className="relative w-screen overflow-hidden mt-16 sm:mt-20">
+      {/* ✅ responsive height */}
+      <div className="relative w-screen h-[40vh] sm:h-[60vh] lg:h-[90vh]">
         <Image
           key={banners[current].id}
           src={banners[current].image}
@@ -578,7 +579,7 @@ export default function Banner() {
         />
       </div>
 
-      {/* ✅ Dots Navigation */}
+      {/* ✅ Dots navigation */}
       <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex space-x-2">
         {banners.map((_, index) => (
           <button
