@@ -2241,6 +2241,145 @@
 
 
 
+// // src/components/ProductGrid.tsx
+// "use client";
+
+// import Image from "next/image";
+// import Link from "next/link";
+// import { useCart } from "@/app/context/CartContext";
+// import { useEffect, useState } from "react";
+// import type { Product } from "@/types/product";
+
+// // 🔧 Utility: normalize & clean image URLs (Google Drive + trimming)
+// function getImageUrl(url?: string) {
+//   if (!url) return "/placeholder.png"; // ✅ fallback if undefined or empty
+
+//   const cleanUrl = url.trim(); // ✅ remove trailing/leading spaces
+
+//   // If it's a Google Drive "view" link, convert to direct
+//   const driveMatch = cleanUrl.match(/\/d\/([^/]+)\//);
+//   if (driveMatch) {
+//     const fileId = driveMatch[1];
+//     return `https://drive.google.com/uc?export=view&id=${fileId}`;
+//   }
+
+//   return cleanUrl;
+// }
+
+// export default function ProductGrid() {
+//   const { addToCart } = useCart();
+//   const [products, setProducts] = useState<Product[]>([]);
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     const fetchProducts = async () => {
+//       try {
+//         const res = await fetch("/api/products");
+//         const data = await res.json();
+
+//         if (!res.ok) {
+//           console.error("Error fetching products:", data);
+//           setProducts([]);
+//         } else {
+//           // ✅ Ensure `id` always exists
+//           const formatted = data.map((p: any) => ({
+//             ...p,
+//             id: p._id ?? p.id,
+//           }));
+//           setProducts(formatted);
+//         }
+//       } catch (err) {
+//         console.error("Error fetching products:", err);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchProducts();
+//   }, []);
+
+//   if (loading) return <p className="text-center mt-10">Loading products...</p>;
+//   if (!products.length) return <p className="text-center mt-10">No products found</p>;
+
+//   return (
+//     <section className="w-full bg-white py-10">
+//       <div className="max-w-6xl mx-auto px-4">
+//         <h2 className="text-2xl font-bold text-gray-800 mb-6">
+//           Featured <span className="text-green-600">Products</span>
+//         </h2>
+
+//         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+//           {products.map((product, index) => (
+//             <div
+//               key={`${product.id}-${index}`} // ✅ unique key fix
+//               className="bg-white rounded-xl shadow-sm hover:shadow-lg transition p-4 flex flex-col"
+//             >
+//               {/* Product Image */}
+//               <Link href={`/products/${product.slug}`}>
+//                 <Image
+//                   src={getImageUrl(product.image)} // ✅ now always string
+//                   alt={product.name}
+//                   width={300}
+//                   height={200}
+//                   className="rounded-lg mx-auto object-contain"
+//                 />
+//               </Link>
+
+//               {/* Product Info */}
+//               <div className="mt-4 flex-1 flex flex-col">
+//                 <h3 className="text-sm font-medium text-gray-900 whitespace-normal break-words">
+//                   {product.name}
+//                 </h3>
+
+//                 {/* Rating */}
+//                 <div className="flex items-center mt-2 text-yellow-500 text-sm">
+//                   {"⭐".repeat(Math.floor(product.rating ?? 0))}
+//                   <span className="ml-1 text-gray-600">
+//                     {product.rating ?? 0} ({product.reviews ?? 0} reviews)
+//                   </span>
+//                 </div>
+
+//                 {/* Price */}
+//                 <div className="mt-2">
+//                   <span className="text-lg font-bold text-green-700">
+//                     ₹{product.price.toLocaleString()}
+//                   </span>
+//                   {product.oldPrice && (
+//                     <span className="ml-2 text-gray-400 line-through">
+//                       ₹{product.oldPrice.toLocaleString()}
+//                     </span>
+//                   )}
+//                 </div>
+
+//                 {/* Discount Badge */}
+//                 {product.discount && (
+//                   <div className="mt-1">
+//                     <span className="bg-orange-100 text-orange-600 text-xs font-semibold px-2 py-1 rounded">
+//                       {product.discount}% OFF
+//                     </span>
+//                   </div>
+//                 )}
+
+//                 {/* Buy Button */}
+//                 <button
+//                   onClick={() => addToCart(product)}
+//                   className="mt-4 w-full bg-green-600 text-white text-center py-2 rounded-md font-medium hover:bg-green-700 transition"
+//                 >
+//                   Buy Now
+//                 </button>
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+
+
+
+
 // src/components/ProductGrid.tsx
 "use client";
 
@@ -2250,13 +2389,11 @@ import { useCart } from "@/app/context/CartContext";
 import { useEffect, useState } from "react";
 import type { Product } from "@/types/product";
 
-// 🔧 Utility: normalize & clean image URLs (Google Drive + trimming)
+// 🔧 Utility: normalize & clean image URLs
 function getImageUrl(url?: string) {
-  if (!url) return "/placeholder.png"; // ✅ fallback if undefined or empty
+  if (!url) return "/placeholder.png"; // ✅ fallback if missing
 
-  const cleanUrl = url.trim(); // ✅ remove trailing/leading spaces
-
-  // If it's a Google Drive "view" link, convert to direct
+  const cleanUrl = url.trim();
   const driveMatch = cleanUrl.match(/\/d\/([^/]+)\//);
   if (driveMatch) {
     const fileId = driveMatch[1];
@@ -2281,7 +2418,6 @@ export default function ProductGrid() {
           console.error("Error fetching products:", data);
           setProducts([]);
         } else {
-          // ✅ Ensure `id` always exists
           const formatted = data.map((p: any) => ({
             ...p,
             id: p._id ?? p.id,
@@ -2303,21 +2439,22 @@ export default function ProductGrid() {
 
   return (
     <section className="w-full bg-white py-10">
-      <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">
+      {/* 🔧 full width wrapper, no left/right gaps */}
+      <div className="w-full px-2 sm:px-4">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 px-2 sm:px-4">
           Featured <span className="text-green-600">Products</span>
         </h2>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4 md:gap-6">
           {products.map((product, index) => (
             <div
-              key={`${product.id}-${index}`} // ✅ unique key fix
+              key={`${product.id}-${index}`}
               className="bg-white rounded-xl shadow-sm hover:shadow-lg transition p-4 flex flex-col"
             >
               {/* Product Image */}
               <Link href={`/products/${product.slug}`}>
                 <Image
-                  src={getImageUrl(product.image)} // ✅ now always string
+                  src={getImageUrl(product.image)}
                   alt={product.name}
                   width={300}
                   height={200}
