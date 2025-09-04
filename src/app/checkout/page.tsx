@@ -3131,6 +3131,274 @@
 
 
 
+// "use client";
+
+// import { useCart } from "@/app/context/CartContext";
+// import { useRouter } from "next/navigation";
+// import Image from "next/image";
+// import { useState } from "react";
+// import UpiQRCode from "@/components/UpiQRCode";
+
+// import {
+//   Dialog,
+//   DialogContent,
+//   DialogHeader,
+//   DialogTitle,
+//   DialogFooter,
+// } from "@/components/ui/dialog";
+// import { Button } from "@/components/ui/button";
+// import { Input } from "@/components/ui/input";
+// import { Label } from "@/components/ui/label";
+
+// export default function CheckoutPage() {
+//   const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
+//   const router = useRouter();
+
+//   const [dialogOpen, setDialogOpen] = useState(false);
+//   const [loading, setLoading] = useState(false);
+//   const [orderId, setOrderId] = useState<string | null>(null);
+//   const [qrAmount, setQrAmount] = useState<number>(0);
+
+//   const [form, setForm] = useState({
+//     name: "",
+//     phone: "",
+//     email: "",
+//     address: "",
+//   });
+
+//   const totalPrice = cart.reduce(
+//     (sum, item) => sum + Number(item.price) * Number(item.quantity),
+//     0
+//   );
+
+//   const handleConfirmOrder = async () => {
+//     if (!form.name || !form.phone || !form.email || !form.address) {
+//       alert("Please fill all the fields!");
+//       return;
+//     }
+
+//     const orderData = {
+//       products: cart.map((item) => ({
+//         _id: item._id || item.id,
+//         name: item.name,
+//         price: Number(item.price),
+//         quantity: Number(item.quantity),
+//       })),
+//       totalPrice,
+//       customer: { ...form },
+//       paymentStatus: "unpaid",
+//       createdAt: new Date(),
+//     };
+
+//     setLoading(true);
+
+//     try {
+//       const res = await fetch("/api/orders", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify(orderData),
+//       });
+
+//       const result = await res.json();
+
+//       if (result.success) {
+//         setQrAmount(totalPrice);
+//         setOrderId(result.order._id);
+//       } else {
+//         alert(`❌ Order failed: ${result.error || "Please try again."}`);
+//       }
+//     } catch (err) {
+//       console.error(err);
+//       alert("❌ Something went wrong. Please try again.");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className="p-4 sm:p-6 max-w-5xl mx-auto bg-white rounded-xl shadow-lg">
+//       <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-green-700">
+//         Checkout
+//       </h1>
+
+//       {cart.length === 0 && !orderId ? (
+//         <div className="p-6 text-center">
+//           <h2 className="text-xl sm:text-2xl font-bold text-gray-800">
+//             Your cart is empty
+//           </h2>
+//           <button
+//             className="mt-5 w-full sm:w-auto px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
+//             onClick={() => router.push("/")}
+//           >
+//             Continue Shopping
+//           </button>
+//         </div>
+//       ) : (
+//         <>
+//           <div className="space-y-4">
+//             {cart.map((item, index) => (
+//               <div
+//                 key={`${item._id || item.id}-${index}`}
+//                 className="flex flex-col sm:flex-row sm:items-center justify-between border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition"
+//               >
+//                 <div className="flex items-center gap-4">
+//                   {item.image && (
+//                     <Image
+//                       src={item.image}
+//                       alt={item.name}
+//                       width={80}
+//                       height={80}
+//                       className="rounded-lg border"
+//                     />
+//                   )}
+//                   <div>
+//                     <h2 className="font-semibold text-base sm:text-lg text-gray-800">
+//                       {item.name}
+//                     </h2>
+//                     <p className="text-sm text-gray-500">
+//                       ₹{item.price} x {item.quantity}
+//                     </p>
+//                   </div>
+//                 </div>
+
+//                 <div className="mt-3 sm:mt-0 flex flex-wrap sm:flex-nowrap items-center gap-2 sm:gap-4">
+//                   <div className="flex items-center gap-2">
+//                     <button
+//                       onClick={() =>
+//                         updateQuantity(
+//                           item._id || item.id,
+//                           Math.max(1, item.quantity - 1)
+//                         )
+//                       }
+//                       className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
+//                     >
+//                       -
+//                     </button>
+//                     <span className="px-2">{item.quantity}</span>
+//                     <button
+//                       onClick={() =>
+//                         updateQuantity(item._id || item.id, item.quantity + 1)
+//                       }
+//                       className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
+//                     >
+//                       +
+//                     </button>
+//                   </div>
+//                   <p className="font-semibold text-green-700">
+//                     ₹{item.price * item.quantity}
+//                   </p>
+//                   <button
+//                     onClick={() => removeFromCart(item._id || item.id)}
+//                     className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+//                   >
+//                     Remove
+//                   </button>
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+
+//           <div className="mt-8 flex flex-col sm:flex-row justify-between items-center border-t pt-4 gap-3">
+//             <h2 className="text-lg sm:text-xl font-bold text-gray-800">
+//               Total: <span className="text-green-700">₹{totalPrice}</span>
+//             </h2>
+
+//             <Button
+//               className="w-full sm:w-auto bg-green-600 hover:bg-green-700"
+//               onClick={() => setDialogOpen(true)}
+//               disabled={loading}
+//             >
+//               {loading ? "Placing Order..." : "Place Order"}
+//             </Button>
+//           </div>
+//         </>
+//       )}
+
+//       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+//         <DialogContent className="sm:max-w-md w-[95%]">
+//           <DialogHeader>
+//             <DialogTitle className="text-lg sm:text-xl">
+//               {!orderId ? "Enter Your Information" : "Scan QR to Pay"}
+//             </DialogTitle>
+//           </DialogHeader>
+
+//           {!orderId ? (
+//             <div className="grid gap-4 py-2">
+//               <div>
+//                 <Label>Name</Label>
+//                 <Input
+//                   value={form.name}
+//                   onChange={(e) => setForm({ ...form, name: e.target.value })}
+//                   placeholder="Enter your name"
+//                 />
+//               </div>
+//               <div>
+//                 <Label>Phone</Label>
+//                 <Input
+//                   type="tel"
+//                   value={form.phone}
+//                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
+//                   placeholder="Enter your phone"
+//                 />
+//               </div>
+//               <div>
+//                 <Label>Email</Label>
+//                 <Input
+//                   type="email"
+//                   value={form.email}
+//                   onChange={(e) => setForm({ ...form, email: e.target.value })}
+//                   placeholder="Enter your email"
+//                 />
+//               </div>
+//               <div>
+//                 <Label>Address</Label>
+//                 <Input
+//                   value={form.address}
+//                   onChange={(e) =>
+//                     setForm({ ...form, address: e.target.value })
+//                   }
+//                   placeholder="Enter delivery address"
+//                 />
+//               </div>
+//             </div>
+//           ) : (
+//             <div key={orderId} className="flex flex-col items-center gap-4 py-4">
+//               <UpiQRCode amount={qrAmount} orderId={orderId} />
+//             </div>
+//           )}
+
+//           <DialogFooter className="flex flex-col sm:flex-row gap-2">
+//             <Button
+//               variant="outline"
+//               className="w-full sm:w-auto"
+//               onClick={() => {
+//                 setDialogOpen(false);
+//                 setOrderId(null);
+//                 clearCart(); // clear cart AFTER QR is shown
+//               }}
+//             >
+//               {orderId ? "Close" : "Cancel"}
+//             </Button>
+//             {!orderId && (
+//               <Button
+//                 className="w-full sm:w-auto bg-green-600 hover:bg-green-700"
+//                 onClick={handleConfirmOrder}
+//                 disabled={loading}
+//               >
+//                 {loading ? "Placing Order..." : "Confirm Order"}
+//               </Button>
+//             )}
+//           </DialogFooter>
+//         </DialogContent>
+//       </Dialog>
+//     </div>
+//   );
+// }
+
+
+
+
+// src/app/checkout/page.tsx
 "use client";
 
 import { useCart } from "@/app/context/CartContext";
@@ -3149,6 +3417,17 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+
+// ✅ helper to clean Drive links & remove trailing spaces
+function sanitizeImageUrl(url?: string): string {
+  if (!url) return "/placeholder.png";
+  return url
+    .trim()
+    .replace(
+      /https:\/\/drive\.google\.com\/file\/d\/([^/]+)\/view.*/,
+      "https://drive.google.com/uc?export=view&id=$1"
+    );
+}
 
 export default function CheckoutPage() {
   const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
@@ -3244,11 +3523,11 @@ export default function CheckoutPage() {
                 <div className="flex items-center gap-4">
                   {item.image && (
                     <Image
-                      src={item.image}
+                      src={sanitizeImageUrl(item.image)} // ✅ sanitize
                       alt={item.name}
                       width={80}
                       height={80}
-                      className="rounded-lg border"
+                      className="rounded-lg border object-contain"
                     />
                   )}
                   <div>
