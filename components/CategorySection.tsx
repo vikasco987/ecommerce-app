@@ -230,20 +230,79 @@
 
 
 
+// "use client";
+
+// import Image from "next/image";
+
+// const categories = [
+//   { id: 1, name: "Men Wellness", image: "/c1.jpg", link: "/category/skincare" },
+//   { id: 2, name: "Women-Wellness", image: "/c2.jpg", link: "/category/haircare" },
+//   { id: 3, name: "Supplements", image: "/c3.jpg", link: "/category/supplements" },
+//   { id: 4, name: "Ayurvedic Oils", image: "/c4.jpg", link: "/category/oils" },
+//     { id: 5, name: "Stomach-Problem", image: "/c5.avif", link: "/category/skincare" },
+//   { id: 6, name: "Immunity-Booster", image: "/c6.avif", link: "/category/haircare" },
+//   { id: 7, name: "Memory-Booster", image: "/c7.avif", link: "/category/supplements" },
+//   { id: 8, name: "Weight-Gain", image: "/c8.avif", link: "/category/oils" },
+// ];
+// export default function TopCategories() {
+//   return (
+//     <section className="py-10 bg-gray-50">
+//       <h2 className="text-3xl font-extrabold text-center mb-8 text-gray-900">
+//         Top Categories
+//       </h2>
+
+//       {/* Mobile: horizontal scroll, Desktop: 2-row grid */}
+//       <div className="px-4">
+//         <div className="grid grid-flow-col auto-cols-[12rem] gap-6 overflow-x-auto md:grid-cols-5 md:grid-rows-2 md:auto-cols-auto md:grid-flow-row">
+//           {categories.map((cat) => (
+//             <a
+//               key={cat.id}
+//               href={cat.link}
+//               className="flex flex-col bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-transform duration-300 cursor-pointer"
+//             >
+//               {/* Image on top */}
+//               <div className="relative w-full h-48">
+//                 <Image
+//                   src={cat.image}
+//                   alt={cat.name}
+//                   fill
+//                   className="object-cover transition-transform duration-500 hover:scale-105"
+//                 />
+//               </div>
+
+//               {/* Name below image */}
+//               <div className="p-4 text-center bg-white">
+//                 <p className="text-lg font-semibold text-gray-800 hover:text-indigo-600 transition-colors">
+//                   {cat.name}
+//                 </p>
+//               </div>
+//             </a>
+//           ))}
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+
+
+
+
 "use client";
 
 import Image from "next/image";
 
 const categories = [
-  { id: 1, name: "Men Wellness", image: "/c1.jpg", link: "/category/skincare" },
-  { id: 2, name: "Women-Wellness", image: "/c2.jpg", link: "/category/haircare" },
-  { id: 3, name: "Supplements", image: "/c3.jpg", link: "/category/supplements" },
-  { id: 4, name: "Ayurvedic Oils", image: "/c4.jpg", link: "/category/oils" },
-    { id: 5, name: "Stomach-Problem", image: "/c5.avif", link: "/category/skincare" },
-  { id: 6, name: "Immunity-Booster", image: "/c6.avif", link: "/category/haircare" },
-  { id: 7, name: "Memory-Booster", image: "/c7.avif", link: "/category/supplements" },
-  { id: 8, name: "Weight-Gain", image: "/c8.avif", link: "/category/oils" },
+  { id: 1, name: "Men Wellness", image: "/c1.jpg" },
+  { id: 2, name: "Women-Wellness", image: "/c2.jpg" },
+  { id: 3, name: "Supplements", image: "/c3.jpg" },
+  { id: 4, name: "Ayurvedic Oils", image: "/c4.jpg" },
+  { id: 5, name: "Stomach-Problem", image: "/c5.avif" },
+  { id: 6, name: "Immunity-Booster", image: "/c6.avif" },
+  { id: 7, name: "Memory-Booster", image: "/c7.avif" },
+  { id: 8, name: "Weight-Gain", image: "/c8.avif" },
 ];
+
 export default function TopCategories() {
   return (
     <section className="py-10 bg-gray-50">
@@ -251,13 +310,11 @@ export default function TopCategories() {
         Top Categories
       </h2>
 
-      {/* Mobile: horizontal scroll, Desktop: 2-row grid */}
       <div className="px-4">
         <div className="grid grid-flow-col auto-cols-[12rem] gap-6 overflow-x-auto md:grid-cols-5 md:grid-rows-2 md:auto-cols-auto md:grid-flow-row">
           {categories.map((cat) => (
-            <a
+            <div
               key={cat.id}
-              href={cat.link}
               className="flex flex-col bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-transform duration-300 cursor-pointer"
             >
               {/* Image on top */}
@@ -276,7 +333,7 @@ export default function TopCategories() {
                   {cat.name}
                 </p>
               </div>
-            </a>
+            </div>
           ))}
         </div>
       </div>
