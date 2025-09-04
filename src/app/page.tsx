@@ -263,6 +263,61 @@
 
 
 
+// import Banner from "../../components/Banner";
+// import Categories from "../../components/CategorySection";
+// import ProductGrid from "../../components/ProductGrid";
+// import TopDiscountedProducts from "../../components/TopDiscountedProducts";
+// import MidBanner from "../../components/MidBanner";
+// import PromisesSection from "../../components/PromisesSection";
+// import ReviewSection from "../../components/ReviewSection";
+// import Footer from "../../components/Footer";
+
+// export default function HomePage() {
+//   return (
+//     <main className="w-screen overflow-x-hidden">
+//       {/* ✅ Full-width banner */}
+//       <section className="w-screen">
+//         <Banner />
+//       </section>
+
+//       {/* ✅ All sections forced full width */}
+//       <section className="w-screen">
+//         <Categories />
+//       </section>
+
+//       <section className="w-screen">
+//         <ProductGrid />
+//       </section>
+
+//       <section className="w-screen">
+//         <MidBanner />
+//       </section>
+
+//       <section className="w-screen">
+//         <TopDiscountedProducts />
+//       </section>
+
+//       <section className="w-screen">
+//         <PromisesSection />
+//       </section>
+
+//       <section className="w-screen">
+//         <ReviewSection />
+//       </section>
+
+//       {/* ✅ Footer full width */}
+//       <footer className="w-screen">
+//         <Footer />
+//       </footer>
+//     </main>
+//   );
+// }
+
+
+
+
+
+
 import Banner from "../../components/Banner";
 import Categories from "../../components/CategorySection";
 import ProductGrid from "../../components/ProductGrid";
@@ -274,39 +329,38 @@ import Footer from "../../components/Footer";
 
 export default function HomePage() {
   return (
-    <main className="w-screen overflow-x-hidden">
-      {/* ✅ Full-width banner */}
-      <section className="w-screen">
+    // ✅ Root never wider than the viewport, no horizontal scroll
+    <main className="site-root">
+      {/* ✅ Full-bleed sections (no gap on left/right on any device) */}
+      <section className="full-bleed">
         <Banner />
       </section>
 
-      {/* ✅ All sections forced full width */}
-      <section className="w-screen">
+      <section className="full-bleed">
         <Categories />
       </section>
 
-      <section className="w-screen">
+      <section className="full-bleed">
         <ProductGrid />
       </section>
 
-      <section className="w-screen">
+      <section className="full-bleed">
         <MidBanner />
       </section>
 
-      <section className="w-screen">
+      <section className="full-bleed">
         <TopDiscountedProducts />
       </section>
 
-      <section className="w-screen">
+      <section className="full-bleed">
         <PromisesSection />
       </section>
 
-      <section className="w-screen">
+      <section className="full-bleed">
         <ReviewSection />
       </section>
 
-      {/* ✅ Footer full width */}
-      <footer className="w-screen">
+      <footer className="full-bleed">
         <Footer />
       </footer>
     </main>
