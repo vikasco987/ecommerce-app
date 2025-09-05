@@ -156,11 +156,89 @@
 
 
 
+// import { NextRequest, NextResponse } from "next/server";
+// import { connectDB } from "@/lib/mongodb";
+// import Order from "@/models/Order";
+
+// // POST /api/orders — create a new order
+// export async function POST(req: NextRequest): Promise<NextResponse> {
+//   try {
+//     await connectDB();
+
+//     const body = await req.json();
+//     const { products, totalPrice, customer, paymentStatus, createdAt } = body;
+
+//     if (!products || !products.length) {
+//       return NextResponse.json(
+//         { success: false, error: "No products in order" },
+//         { status: 400 }
+//       );
+//     }
+
+//     // Filter valid products (must have _id, price, quantity)
+//     const validProducts = products.filter(
+//       (p: any) =>
+//         p._id &&
+//         typeof p.price === "number" &&
+//         typeof p.quantity === "number"
+//     );
+
+//     if (!validProducts.length) {
+//       return NextResponse.json(
+//         { success: false, error: "No valid products in order" },
+//         { status: 400 }
+//       );
+//     }
+
+//     const order = await Order.create({
+//       products: validProducts,
+//       totalPrice,
+//       customer,
+//       paymentStatus: paymentStatus || "unpaid",
+//       createdAt: createdAt || new Date(),
+//     });
+
+//     return NextResponse.json({ success: true, order });
+//   } catch (err: any) {
+//     console.error("POST /api/orders error:", err);
+//     return NextResponse.json(
+//       { success: false, error: err.message || "Failed to place order" },
+//       { status: 500 }
+//     );
+//   }
+// }
+
+// // GET /api/orders — fetch all orders
+// export async function GET(): Promise<NextResponse> {
+//   try {
+//     await connectDB();
+//     const orders = await Order.find().sort({ createdAt: -1 });
+//     return NextResponse.json({ success: true, orders });
+//   } catch (err: any) {
+//     console.error("GET /api/orders error:", err);
+//     return NextResponse.json(
+//       { success: false, error: err.message || "Failed to fetch orders" },
+//       { status: 500 }
+//     );
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
 import { NextRequest, NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import Order from "@/models/Order";
 
-// POST /api/orders — create a new order
+// ✅ POST /api/orders — create a new order
 export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
     await connectDB();
@@ -168,6 +246,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     const body = await req.json();
     const { products, totalPrice, customer, paymentStatus, createdAt } = body;
 
+    // Basic validations
     if (!products || !products.length) {
       return NextResponse.json(
         { success: false, error: "No products in order" },
@@ -190,10 +269,33 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       );
     }
 
+    // ✅ Validate required customer fields
+    if (
+      !customer ||
+      !customer.name ||
+      !customer.phone ||
+      !customer.email ||
+      !customer.address ||
+      !customer.pincode
+    ) {
+      return NextResponse.json(
+        { success: false, error: "Missing required customer details" },
+        { status: 400 }
+      );
+    }
+
+    // ✅ Create order
     const order = await Order.create({
       products: validProducts,
       totalPrice,
-      customer,
+      customer: {
+        name: customer.name,
+        phone: customer.phone,
+        email: customer.email,
+        address: customer.address,
+        pincode: customer.pincode, // ✅ Added Pin Code
+        landmark: customer.landmark || "", // ✅ Added Landmark (optional)
+      },
       paymentStatus: paymentStatus || "unpaid",
       createdAt: createdAt || new Date(),
     });
@@ -208,7 +310,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   }
 }
 
-// GET /api/orders — fetch all orders
+// ✅ GET /api/orders — fetch all orders
 export async function GET(): Promise<NextResponse> {
   try {
     await connectDB();
