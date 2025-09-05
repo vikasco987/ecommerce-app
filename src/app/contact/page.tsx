@@ -12,7 +12,7 @@ export default function ContactPage() {
         Contact Us
       </h1>
       <p className="text-center text-gray-700 max-w-3xl mb-12">
-        We are here to help! Reach out to Aushdhi Viraat Head Office for any queries related to our products and services.
+        We are here to help! Reach out to Do Health Gyan Head Office for any queries related to our products and services.
       </p>
 
       {/* Contact Details Card */}
@@ -23,17 +23,17 @@ export default function ContactPage() {
           <div className="flex items-start gap-2 mb-2">
             <MapPin size={20} className="text-green-600" />
             <p>
-              Shiv Ganga Nagar, Sk Pharma Road, <br />
-              Peetal Nagri, Moradabad, Uttar Pradesh, India-244001
+              Near Lic Office Pilibhit<br />
+              Pin 262001
             </p>
           </div>
           <div className="flex items-center gap-2 mb-2">
             <Phone size={20} className="text-green-600" />
-            <p>1800 889 8677</p>
+            <p>9557340899</p>
           </div>
           <div className="flex items-center gap-2 mb-2">
             <Mail size={20} className="text-green-600" />
-            <p>info@aushdhiviraat.org</p>
+            <p>aushdhiviraat77@gmail.com</p>
           </div>
         </div>
 

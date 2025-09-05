@@ -16,25 +16,25 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
         {/* Company Info */}
         <div>
-          <h2 className="text-lg font-bold mb-4">Aushdhi Viraat</h2>
+          <h2 className="text-lg font-bold mb-4">Do Health Gyan</h2>
           <ul className="space-y-3 text-sm">
             <li className="flex items-start gap-2">
               <MapPin className="w-5 h-5 text-sky-600 mt-1 shrink-0" />
               <span>
                 <strong>Head Office :</strong>
                 <br />
-                Shiv Ganga Nagar, Sk Pharma Road,
+                Near Lic Office
                 <br />
-                Peetal Nagri, Moradabad, Uttar Pradesh, India-244001
+                Pilibhit Pin 262001
               </span>
             </li>
             <li className="flex items-center gap-2">
               <Phone className="w-5 h-5 text-sky-600 shrink-0" />
-              <span>1800 889 8677</span>
+              <span>9557340899</span>
             </li>
             <li className="flex items-center gap-2">
               <Mail className="w-5 h-5 text-sky-600 shrink-0" />
-              <span>info@aushdhiviraat.org</span>
+              <span>aushdhiviraat77@gmail.com</span>
             </li>
           </ul>
 
